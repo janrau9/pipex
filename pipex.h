@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 08:47:22 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/18 08:54:52 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/22 10:26:41 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdbool.h>
+# include <errno.h>
+# include <string.h>
 
 # define INPUT_ERROR "Invalid number of arguments.\n"
-# define INFILE_ERROR "Infile"
+# define INFILE_ERROR "Pipex"
 # define OUTFILE_ERROR "Outfile"
 # define PIPE_ERROR "Pipe"
 # define FORK_ERROR "Fork Failed"
@@ -34,6 +37,19 @@ typedef struct s_pipex
 	char	**command_paths;
 }			t_pipex;
 
-char	**ft_split_pipex(char const *s, char *reject);
+typedef struct s_quote
+{
+	int	open;
+	int	close;
+	int	q;
+	int	i;
+	int	j;
+	int	len;
+	int	count;
+	int	flag;
+}			t_quote;
+
+char	**ft_split_pipex(char *s);
+// void	open_close(t_quote *quote, char *s);
 
 #endif
