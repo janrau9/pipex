@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 11:30:30 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/25 12:14:37 by jberay           ###   ########.fr       */
+/*   Created: 2024/01/25 12:29:14 by jberay            #+#    #+#             */
+/*   Updated: 2024/01/25 12:29:15 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	check_args(t_pipex *pipex, int argc, char **argv)
 	if (pipex->in_err && pipex->out_err)
 		exit (pipex->out_err);
 }
-
 
 void	call_pipe(t_pipex *pipex, char **envp)
 {

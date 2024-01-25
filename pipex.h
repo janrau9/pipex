@@ -6,18 +6,19 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 08:47:22 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/25 12:09:44 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/25 13:14:02 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <unistd.h>
+//open
 # include <fcntl.h>
-# include <stdbool.h>
+//strerror
 # include <errno.h>
 # include <string.h>
+//perror
 # include <stdio.h>
 
 # define INPUT_ERROR "Invalid number of arguments."

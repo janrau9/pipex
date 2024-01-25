@@ -6,13 +6,12 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:18:29 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/23 10:39:36 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/25 13:15:40 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include "libft/libft.h"
-#include <stdio.h>
 
 static char	**word_split(t_quote quote, char **arr, char *s)
 {

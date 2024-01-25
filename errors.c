@@ -5,14 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 11:05:42 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/25 11:45:11 by jberay           ###   ########.fr       */
+/*   Created: 2024/01/25 12:28:24 by jberay            #+#    #+#             */
+/*   Updated: 2024/01/25 12:28:26 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include "libft/libft.h"
-
 
 void	cmd_err(char *msg, char *strerr, char **arg)
 {
