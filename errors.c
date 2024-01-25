@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:05:42 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/25 08:04:27 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/25 11:45:11 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,30 @@
 #include "libft/libft.h"
 
 
-void	exit_err(char *msg, char *strerr, char *arg)
+void	cmd_err(char *msg, char *strerr, char **arg)
 {
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd(strerr, 2);
 	ft_putstr_fd(": ", 2);
-	ft_putendl_fd(arg, 2);
+	ft_putendl_fd(arg[0], 2);
+	free_split(arg);
 	exit (127);
 }
 
-int	return_err(char *msg, char *strerr, char *arg)
+void	args_err(char *msg, char *strerr, char *arg)
 {
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd(strerr, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putendl_fd(arg, 2);
-	return (1);
+}
+
+void	exit_perror_exec(char *msg, char *path)
+{
+	perror(msg);
+	if (path)
+		free(path);
+	exit (1);
 }
 
 void	exit_perror(char *msg)
@@ -42,17 +50,4 @@ void	close_fd(int x, int y)
 {
 	close(x);
 	close(y);
-}
-
-void	free_command_path(t_pipex pipex)
-{
-	int	i;
-
-	i = 0;
-	while (pipex.command_paths[i])
-	{
-		free(pipex.command_paths[i]);
-		i--;
-	}
-	free(pipex.command_paths);
 }

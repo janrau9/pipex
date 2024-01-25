@@ -6,7 +6,7 @@
 #    By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/07 11:38:23 by jberay            #+#    #+#              #
-#    Updated: 2024/01/23 11:31:44 by jberay           ###   ########.fr        #
+#    Updated: 2024/01/25 10:10:39 by jberay           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRCS 			=	pipex.c \
 					ft_split_pipex.c \
 					ft_split_utils.c \
 					errors.c \
-					pipex_utils.c
+					pipex_utils.c \
+					frees.c
 						
 OBJS			=	$(SRCS:%.c=%.o)
 

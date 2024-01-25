@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:30:30 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/25 08:29:15 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/25 12:14:37 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,38 +25,56 @@ void	call_join(t_pipex *pipex)
 	int		i;
 	char	*tmp;
 
-	i = 0;
-	while (pipex->command_paths[i])
+	i = -1;
+	while (pipex->command_paths[++i])
 	{
 		tmp = ft_strjoin(pipex->command_paths[i], "/");
+		if (!tmp)
+		{
+			free_struct(pipex);
+			exit (1);
+		}
 		pipex->command = ft_strjoin(tmp, pipex->args[0]);
+		if (!pipex->command)
+		{
+			free_struct(pipex);
+			free(tmp);
+			exit (1);
+		}
+		free (tmp);
 		if (access(pipex->command, 0) == 0)
-			pipex->path = pipex->command;
-		i++;
+			pipex->path = ft_strdup(pipex->command);
+		free (pipex->command);
 	}
+	free_split(pipex->command_paths);
 }
 
-int	check_args_in(t_pipex *pipex, int argc, char **argv)
+void	check_args(t_pipex *pipex, int argc, char **argv)
 {
+	pipex->in_err = 0;
+	pipex->out_err = 0;
 	if (argc != 5)
 	{
 		ft_putstr_fd("zsh: ", 2);
 		ft_putendl_fd(INPUT_ERROR, 2);
 		exit (1);
 	}
-	pipex->infile_fd = open(argv[1], O_RDONLY);
-	if (pipex->infile_fd == -1)
-		return (return_err("zsh: ", strerror(errno), argv[1]));
-	return (0);
+	pipex->in_fd = open(argv[1], O_RDONLY);
+	if (pipex->in_fd == -1)
+	{
+		pipex->in_err = 1;
+		args_err("zsh: ", strerror(errno), argv[1]);
+	}
+	pipex->out_fd = open(argv[argc - 1], O_TRUNC | O_CREAT | O_RDWR, 0666);
+	if (pipex->out_fd == -1)
+	{
+		pipex->out_err = 1;
+		args_err("zsh: ", strerror(errno), argv[4]);
+	}
+	if (pipex->in_err && pipex->out_err)
+		exit (pipex->out_err);
 }
 
-int	check_args_out(t_pipex *pipex, int argc, char **argv)
-{
-	pipex->outfile_fd = open(argv[argc - 1], O_TRUNC | O_CREAT | O_RDWR, 0666);
-	if (pipex->outfile_fd == -1)
-		return (return_err("zsh: ", strerror(errno), argv[4]));
-	return (0);
-}
 
 void	call_pipe(t_pipex *pipex, char **envp)
 {
