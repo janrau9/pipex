@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:12:59 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/19 14:40:20 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/22 11:01:09 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	main(void)
 	int		i;
 
 	// result = ft_split_pipex("awk \'{count++} END {print count}\'", ' ');
-	result = ft_split_pipex("sed \"s/And/But/\"", ' ');
+	result = ft_split_pipex("awk '{c++} END {print c}'");
 	i = 0;
-	// printf("%s \n","awk \'\"{count++} END {print count}\"\'");
+	printf("%s \n","awk '{count++} END {print count}'");
 	while (result[i])
 	{
 		printf("%s\n", result[i]);
