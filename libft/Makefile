@@ -6,7 +6,7 @@
 #    By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 09:33:34 by jberay            #+#    #+#              #
-#    Updated: 2024/01/15 13:24:14 by jberay           ###   ########.fr        #
+#    Updated: 2024/01/30 11:26:37 by jberay           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,8 +60,6 @@ OBJS := $(SRCS:.c=.o)
 
 BONUS_OBJS := $(BONUS_SRC:.c=.o)
 
-LIBH = libft.h
-
 CFLAGS = -Wall -Wextra -Werror
 
 NAME = libft.a
@@ -71,7 +69,7 @@ LIBC = ar -rcs
 RM = rm -f
 
 %.o: %.c $(LIBH) 
-	@cc $(CFLAGS) -c $< -o $@  -I $(LIBH)
+	@cc $(CFLAGS) -c $< -o $@  -I.
 
 $(NAME): $(OBJS) 
 	@$(LIBC) $(NAME) $(OBJS) 

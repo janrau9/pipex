@@ -6,12 +6,11 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:18:55 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/22 11:18:56 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/30 11:31:56 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include "libft/libft.h"
 
 static char	**clear_array(char **s, size_t j)
 {
