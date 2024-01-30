@@ -6,19 +6,17 @@
 #    By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/07 11:38:23 by jberay            #+#    #+#              #
-#    Updated: 2024/01/25 10:10:39 by jberay           ###   ########.fr        #
+#    Updated: 2024/01/30 13:45:31 by jberay           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	pipex
 
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -g
 RM				=	rm -rf
 
 SRCS 			=	pipex.c \
-					ft_split_pipex.c \
-					ft_split_utils.c \
 					errors.c \
 					pipex_utils.c \
 					frees.c

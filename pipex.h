@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 08:47:22 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/30 11:33:14 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/30 16:33:23 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,13 @@ typedef struct s_pipex
 	int		pid1_err;
 	int		pid2_err;
 	int		wait_status;
+	int		join;
+	char	*tmp;
 	char	*path;
 	char	**command_paths;
 	char	*command;
 	char	**args;
 }			t_pipex;
-
-typedef struct s_quote
-{
-	int	open;
-	int	close;
-	int	q;
-	int	i;
-	int	j;
-	int	len;
-	int	count;
-	int	flag;
-}			t_quote;
-
-char	**ft_split_pipex(char *s);
-void	open_close(t_quote *quote, char *s);
-void	count_flag(t_quote *quote, char c);
-char	**get_word_space(t_quote *quote, char **arr, char *s);
-char	**get_word_quote(t_quote *q, char **arr, char *s);
 
 void	exit_perror_exec(char *msg, char *path);
 void	exit_perror(char *msg);
@@ -71,7 +55,8 @@ void	empty_err(char *msg, char *strerr, char **arg);
 
 void	close_fd(int x, int y);
 void	free_split(char **args);
-void	free_struct(t_pipex *pipex);
+void	exit_free_struct(t_pipex *pipex);
+void	exit_free_split(char **args);
 
 char	*get_path(char **envp);
 void	call_join(t_pipex *pipex);

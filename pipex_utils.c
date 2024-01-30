@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 12:29:14 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/30 11:31:52 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/30 16:34:26 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*get_path(char **envp)
 {
-	if (envp == NULL)
+	if (envp == NULL || *envp == NULL)
 		return (NULL);
 	while (*envp)
 	{
@@ -22,38 +22,36 @@ char	*get_path(char **envp)
 			return (*envp + 5);
 		envp++;
 	}
-	ft_putstr_fd("Pipex: ", 2);
-	ft_putendl_fd("Can't find path", 2);
-	exit (1);
+	return (NULL);
 }
 
 void	call_join(t_pipex *pipex)
 {
 	int		i;
-	char	*tmp;
 
 	i = -1;
 	while (pipex->command_paths[++i])
 	{
-		tmp = ft_strjoin(pipex->command_paths[i], "/");
-		if (!tmp)
-		{
-			free_struct(pipex);
-			exit (1);
-		}
-		pipex->command = ft_strjoin(tmp, pipex->args[0]);
+		pipex->tmp = ft_strjoin(pipex->command_paths[i], "/");
+		if (!pipex->tmp)
+			exit_free_struct(pipex);
+		pipex->command = ft_strjoin(pipex->tmp, pipex->args[0]);
 		if (!pipex->command)
 		{
-			free_struct(pipex);
-			free(tmp);
-			exit (1);
+			free(pipex->tmp);
+			exit_free_struct(pipex);
 		}
-		free (tmp);
+		free (pipex->tmp);
 		if (access(pipex->command, 0) == 0)
+		{
 			pipex->path = ft_strdup(pipex->command);
+			return ;
+		}
 		free (pipex->command);
 	}
 	free_split(pipex->command_paths);
+	if (pipex->args[0][0] != '/')
+		pipex->join = 1;
 }
 
 void	check_args(t_pipex *pipex, int argc, char **argv)
@@ -89,8 +87,8 @@ void	call_pipe(t_pipex *pipex, char **envp)
 	pipex->path = get_path(envp);
 	if (pipex->path == NULL)
 	{
-		ft_putendl_fd("Envp is NULL", 2);
-		exit (1);
+		pipex->command_paths = NULL;
+		return ;
 	}
 	pipex->command_paths = ft_split(pipex->path, ':');
 	if (!pipex->command_paths)

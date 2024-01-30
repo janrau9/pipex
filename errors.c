@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 12:28:24 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/30 11:51:38 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/30 16:35:54 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,11 @@ void	empty_err(char *msg, char *strerr, char **arg)
 
 void	exec_err(char *msg, char *path, char **arg)
 {
+	(void)path;
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd(": ", 2);
-	ft_putendl_fd(path, 2);
-	if (path)
-		free(path);
+	ft_putendl_fd(arg[0], 2);
 	if (arg)
 		free_split(arg);
 	exit (1);
